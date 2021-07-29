@@ -1,0 +1,11 @@
+{
+  "name": "jazztech-test",
+  "version": "1.0.0",
+  "description": "Backend test for Jazz Tech company",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Nicolas Hudson de Mello",
+  "license": "ISC"
+}
