@@ -1,3 +1,5 @@
+import Robot from '../models/Robot'
+
 test('Virando 90° para a esquerda olhando para o Norte', () => {
    let robot = new Robot({
       x: 0,

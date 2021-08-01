@@ -9,6 +9,9 @@
   "author": "Nicolas Hudson de Mello",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-jest": "^27.0.6",
     "jest": "^27.0.6"
   }
 }

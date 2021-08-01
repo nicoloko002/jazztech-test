@@ -1,8 +1,10 @@
+import Robot from '../models/Robot'
+
 test('Movimentar robô com ele voltado para o Norte', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.FACING_NORTH);
+   }, Robot.orientations.FACING_NORTH);
 
    robot.move();
 
@@ -16,7 +18,7 @@ test('Movimentar robô com ele voltado para o Sul', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.FACING_SOUTH);
+   }, Robot.orientations.FACING_SOUTH);
 
    robot.move();
 
@@ -30,7 +32,7 @@ test('Movimentar robô com ele voltado para o Leste', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.FACING_EAST);
+   }, Robot.orientations.FACING_EAST);
 
    robot.move();
 
@@ -44,7 +46,7 @@ test('Movimentar robô com ele voltado para o Oeste', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.FACING_WEST);
+   }, Robot.orientations.FACING_WEST);
 
    robot.move();
 
