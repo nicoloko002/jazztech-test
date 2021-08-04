@@ -1,4 +1,4 @@
-import Robot from '../models/Robot'
+import Robot from '../app/models/Robot'
 
 test('Irrigação sendo incluída na lista de ações', () => {
    let robot = new Robot({
