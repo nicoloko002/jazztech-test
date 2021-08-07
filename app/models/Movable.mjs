@@ -8,7 +8,6 @@ const orientations = {
 const actions = {
     TURN_LEFT: 'E',
     TURN_RIGHT: 'D',
-    IRRIGATE: 'I',
     MOVE: 'M'
 };
 
