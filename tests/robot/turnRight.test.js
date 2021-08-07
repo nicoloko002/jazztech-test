@@ -4,7 +4,7 @@ test('Virando 90° para a direita olhando para o Norte', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.orientations.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    robot.turnRight();
 
@@ -15,7 +15,7 @@ test('Virando 90° para a direita olhando para o Leste', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.orientations.FACING_EAST);
+   }, Robot.orientationLetters[Robot.orientations.FACING_EAST]);
 
    robot.turnRight();
 
@@ -26,7 +26,7 @@ test('Virando 90° para a direita olhando para o Sul', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.orientations.FACING_SOUTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_SOUTH]);
 
    robot.turnRight();
 
@@ -37,7 +37,7 @@ test('Virando 90° para a direita olhando para o Oeste', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.orientations.FACING_WEST);
+   }, Robot.orientationLetters[Robot.orientations.FACING_WEST]);
 
    robot.turnRight();
 

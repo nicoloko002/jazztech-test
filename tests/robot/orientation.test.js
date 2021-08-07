@@ -5,7 +5,7 @@ test('Orientação para todos os lados está correta', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.orientations.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    expect(Movement.getAxisFromOrientation(robot.orientation)).toBe('y');
 

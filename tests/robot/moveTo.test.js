@@ -5,7 +5,7 @@ test('Output utilizando moveTo (MMDMMM)', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.orientations.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    Movement.moveTo(robot, {
       x: 4,
@@ -19,7 +19,7 @@ test('Output utilizando moveTo (MMEM)', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.orientations.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    Movement.moveTo(robot, {
       x: 0,
@@ -33,7 +33,7 @@ test('Output utilizando moveTo (EEM)', () => {
    let robot = new Robot({
       x: 1,
       y: 1
-   }, Robot.orientations.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    Movement.moveTo(robot, {
       x: 1,

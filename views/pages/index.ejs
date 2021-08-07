@@ -12,11 +12,11 @@
             <div class="flex mx-2 flex-wrap">
                <div class="flex w-full md:w-1/2">
                   <div class="form-group">
-                     <input type="number" required min="0" id="width" x-model="map.width" placeholder=" ">
+                     <input type="number" required min="0" id="width" x-model.number="map.width" placeholder=" ">
                      <label for="width">Largura</label>
                   </div>
                   <div class="form-group">
-                     <input type="number" required min="0" id="height" x-model="map.height" placeholder=" ">
+                     <input type="number" required min="0" id="height" x-model.number="map.height" placeholder=" ">
                      <label for="height">Altura</label>
                   </div>
                </div>
@@ -30,11 +30,11 @@
                <div class="flex mx-2 flex-wrap">
                   <div class="flex w-full md:w-1/2">
                      <div class="form-group w-1/2">
-                        <input type="number" required min="0" :max="map.width" id="initial-position-x" x-model="initialPosition.x" placeholder=" ">
+                        <input type="number" required min="0" :max="map.width" id="initial-position-x" x-model.number="initialPosition.x" placeholder=" ">
                         <label for="initial-position-x">Coord. X</label>
                      </div>
                      <div class="form-group w-1/2">
-                        <input type="number" required min="0" :max="map.height" id="initial-position-y" x-model="initialPosition.y" placeholder=" ">
+                        <input type="number" required min="0" :max="map.height" id="initial-position-y" x-model.number="initialPosition.y" placeholder=" ">
                         <label for="initial-position-y">Coord. Y</label>
                      </div>
                   </div>
@@ -42,10 +42,10 @@
                   <div class="flex flex-col flex-grow mx-2">
                      <label class="font-bold text-blue-500">Orientação inicial</label>
                      <div class="flex flex-wrap justify-between">
-                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_NORTH %>"> Norte</label>
-                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_SOUTH %>"> Sul</label>
-                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_EAST %>"> Leste</label>
-                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_WEST %>"> Oeste</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientationLetters[orientations.FACING_NORTH] %>"> Norte</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientationLetters[orientations.FACING_SOUTH] %>"> Sul</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientationLetters[orientations.FACING_EAST] %>"> Leste</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientationLetters[orientations.FACING_WEST] %>"> Oeste</label>
                      </div>
                   </div>
                </div>
@@ -60,11 +60,11 @@
                         <legend class="font-bold text-blue-500">Canteiro <span x-text="index + 1"></span></legend>
                         <div class="flex">
                            <div class="form-group w-1/2">
-                              <input type="number" min="0" :max="map.width" required :id="'coordinateX' + index" x-model="flowerbed.x" placeholder=" ">
+                              <input type="number" min="0" :max="map.width" required :id="'coordinateX' + index" x-model.number="flowerbed.x" placeholder=" ">
                               <label :for="'coordinateX' + index">Coord. X</label>
                            </div>
                            <div class="form-group w-1/2">
-                              <input type="number" min="0" :max="map.height" required :id="'coordinateY' + index" x-model="flowerbed.y" placeholder=" ">
+                              <input type="number" min="0" :max="map.height" required :id="'coordinateY' + index" x-model.number="flowerbed.y" placeholder=" ">
                               <label :for="'coordinateY' + index">Coord. Y</label>
                            </div>
                         </div>
@@ -106,7 +106,7 @@
             axios.post('/turn-on-robot', {
                map: this.map,
                initialPosition: e.detail.initialPosition,
-               initialOrientation: +e.detail.initialOrientation,
+               initialOrientation: e.detail.initialOrientation,
                flowerbedsToIrrigate: e.detail.flowerbedsToIrrigate
             }).then(response => this.actionsHistory = response.data.actions)
               .catch(e => alert('Não foi possível realizar a operação: ' + e.message));
@@ -118,7 +118,7 @@
             x: null,
             y: null
          },
-         initialOrientation: <%= orientations.FACING_NORTH %>,
+         initialOrientation: '<%= orientationLetters[orientations.FACING_NORTH] %>',
          flowerbedsToIrrigate: [
             {
                x: null,

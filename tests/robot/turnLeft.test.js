@@ -4,42 +4,42 @@ test('Virando 90° para a esquerda olhando para o Norte', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.FACING_NORTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_NORTH]);
 
    robot.turnLeft();
 
-   expect(robot.facing).toBe(Robot.FACING_WEST);
+   expect(robot.orientation).toBe(Robot.orientations.FACING_WEST);
 });
 
 test('Virando 90° para a esquerda olhando para o Oeste', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.FACING_WEST);
+   }, Robot.orientationLetters[Robot.orientations.FACING_WEST]);
 
    robot.turnLeft();
 
-   expect(robot.facing).toBe(Robot.FACING_SOUTH);
+   expect(robot.orientation).toBe(Robot.orientations.FACING_SOUTH);
 });
 
 test('Virando 90° para a esquerda olhando para o Sul', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.FACING_SOUTH);
+   }, Robot.orientationLetters[Robot.orientations.FACING_SOUTH]);
 
    robot.turnLeft();
 
-   expect(robot.facing).toBe(Robot.FACING_EAST);
+   expect(robot.orientation).toBe(Robot.orientations.FACING_EAST);
 });
 
 test('Virando 90° para a esquerda olhando para o Leste', () => {
    let robot = new Robot({
       x: 0,
       y: 0
-   }, Robot.FACING_EAST);
+   }, Robot.orientationLetters[Robot.orientations.FACING_EAST]);
 
    robot.turnLeft();
 
-   expect(robot.facing).toBe(Robot.FACING_NORTH);
+   expect(robot.orientation).toBe(Robot.orientations.FACING_NORTH);
 });

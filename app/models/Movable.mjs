@@ -5,6 +5,13 @@ const orientations = {
     FACING_WEST: 3
 };
 
+const orientationLetters = [
+    'N',
+    'L',
+    'S',
+    'O'
+];
+
 const actions = {
     TURN_LEFT: 'E',
     TURN_RIGHT: 'D',
@@ -20,6 +27,10 @@ export default class Movable {
         return orientations;
     }
 
+    static get orientationLetters() {
+        return orientationLetters;
+    }
+
     static get actions() {
         return actions;
     }
@@ -28,9 +39,9 @@ export default class Movable {
         return this._actionsHistory.join('');
     }
 
-    constructor(position, orientation) {
+    constructor(position, orientationLetter) {
         this.position = position;
-        this.orientation = orientation;
+        this.orientation = orientationLetters.indexOf(orientationLetter);
         this._actionsHistory = [];
     }
 
