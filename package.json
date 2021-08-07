@@ -2,7 +2,7 @@
   "name": "jazztech-test",
   "version": "1.0.0",
   "description": "Backend test for Jazz Tech company",
-  "main": "index.js",
+  "main": "server.mjs",
   "scripts": {
     "test": "jest",
     "dev": "npm run development",
@@ -19,8 +19,10 @@
     "@babel/core": "^7.15.0",
     "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^27.0.6",
+    "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.27.5",
     "browser-sync-webpack-plugin": "^2.3.0",
     "cross-env": "^7.0.3",
@@ -28,6 +30,8 @@
     "laravel-mix": "^6.0.27",
     "nodemon": "^2.0.12",
     "regenerator-runtime": "^0.13.9",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.4",
     "tailwindcss": "^2.2.7"
   },
   "dependencies": {

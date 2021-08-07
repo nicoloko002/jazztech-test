@@ -106,7 +106,7 @@
             axios.post('/turn-on-robot', {
                map: this.map,
                initialPosition: e.detail.initialPosition,
-               initialOrientation: e.detail.initialOrientation,
+               initialOrientation: +e.detail.initialOrientation,
                flowerbedsToIrrigate: e.detail.flowerbedsToIrrigate
             }).then(response => this.actionsHistory = response.data.actions)
               .catch(e => alert('Não foi possível realizar a operação: ' + e.message));
