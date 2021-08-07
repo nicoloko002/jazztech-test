@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <%- include('../partials/head'); %>
+
+   <body>
+      <%- include('../partials/header'); %>
+
+      <main x-data="robot" class="container mx-auto mb-12 lg:max-w-6xl">
+         <div class="info-group">
+            <h2>Mapa</h2>
+
+            <div class="flex mx-2 flex-wrap">
+               <div class="flex w-full md:w-1/2">
+                  <div class="form-group">
+                     <input type="number" required min="0" id="width" x-model="map.width" placeholder=" ">
+                     <label for="width">Largura</label>
+                  </div>
+                  <div class="form-group">
+                     <input type="number" required min="0" id="height" x-model="map.height" placeholder=" ">
+                     <label for="height">Altura</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div x-data="mapping" @turn-on-robot="turnOn">
+            <div class="info-group">
+               <h2>Estado inicial</h2>
+
+               <div class="flex mx-2 flex-wrap">
+                  <div class="flex w-full md:w-1/2">
+                     <div class="form-group w-1/2">
+                        <input type="number" required min="0" :max="map.width" id="initial-position-x" x-model="initialPosition.x" placeholder=" ">
+                        <label for="initial-position-x">Coord. X</label>
+                     </div>
+                     <div class="form-group w-1/2">
+                        <input type="number" required min="0" :max="map.height" id="initial-position-y" x-model="initialPosition.y" placeholder=" ">
+                        <label for="initial-position-y">Coord. Y</label>
+                     </div>
+                  </div>
+
+                  <div class="flex flex-col flex-grow mx-2">
+                     <label class="font-bold text-blue-500">Orientação inicial</label>
+                     <div class="flex flex-wrap justify-between">
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_NORTH %>"> Norte</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_SOUTH %>"> Sul</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_EAST %>"> Leste</label>
+                        <label><input type="radio" x-model="initialOrientation" name="initial-orientation" value="<%= orientations.FACING_WEST %>"> Oeste</label>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="info-group">
+               <h2>Canteiros a irrigar <button type="button" name="button" @click="addFlowerbed" class="-m-1.5 bg-green-400 border-4 border-green-500 float-right font-bold hover:bg-green-500 hover:border-green-600 pb-1 rounded-lg w-10" title="Incluir canteiro na primeira posição">+</button></h2>
+
+               <div class="grid gap-2" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                  <template x-for="(flowerbed, index) in flowerbedsToIrrigate">
+                     <fieldset class="border border-solid border-gray-300 p-1 min-w-full sm:min-w-0 relative">
+                        <legend class="font-bold text-blue-500">Canteiro <span x-text="index + 1"></span></legend>
+                        <div class="flex">
+                           <div class="form-group w-1/2">
+                              <input type="number" min="0" :max="map.width" required :id="'coordinateX' + index" x-model="flowerbed.x" placeholder=" ">
+                              <label :for="'coordinateX' + index">Coord. X</label>
+                           </div>
+                           <div class="form-group w-1/2">
+                              <input type="number" min="0" :max="map.height" required :id="'coordinateY' + index" x-model="flowerbed.y" placeholder=" ">
+                              <label :for="'coordinateY' + index">Coord. Y</label>
+                           </div>
+                        </div>
+                        <div class="absolute top-0 right-0 -mt-6">
+                           <button type="button" name="button" @click="addFlowerbed(index)" class="bg-green-400 border-4 border-green-500 font-bold hover:bg-green-500 hover:border-green-600 rounded-l-lg w-6 h-6 text-white relative" title="Incluir canteiro à frente">&nbsp;<span class="-top-1.5 absolute left-1">+</span></button>
+                           <button type="button" name="button" @click="removeFlowerbed(index)" :disabled="flowerbedsToIrrigate.length === 1" class="border-4 font-bold rounded-r-lg w-6 h-6 text-white mt-auto relative -ml-1 mr-2" :class="flowerbedsToIrrigate.length === 1 ? 'bg-red-200 border-red-300 cursor-not-allowed' : 'bg-red-400 border-red-500 hover:bg-red-500 hover:border-red-600'" title="Remover canteiro">&nbsp;<span class="-top-1.5 absolute left-0.5">x</span></button>
+                        </div>
+                     </fieldset>
+                  </template>
+               </div>
+            </div>
+
+            <div class="flex"><button type="button" @click="confirmConfigs" class="text-center w-full rounded-lg mb-8 p-4 bg-green-400 hover:bg-green-500 text-white font-bold bg-gradient-to-bl shadow-md" :class="'from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700'">Ativar Robô</button></div>
+         </div>
+
+         <div class="info-group">
+            <h2 for="output">Saída</h2>
+
+            <div class="form-group mt-4">
+               <textarea id="output" type="text" readonly :value="actionsHistory" class="border w-full"></textarea>
+            </div>
+         </div>
+      </main>
+
+      <%- include('../partials/footer'); %>
+   </body>
+</html>
+
+<script type="text/javascript">
+   document.addEventListener('alpine:init', () => {
+      Alpine.data('robot', () => ({
+         actionsHistory: '',
+         map: {
+            width: null,
+            height: null
+         },
+
+         turnOn(e) {
+            axios.post('/turn-on-robot', {
+               map: this.map,
+               initialPosition: e.detail.initialPosition,
+               initialOrientation: e.detail.initialOrientation,
+               flowerbedsToIrrigate: e.detail.flowerbedsToIrrigate
+            }).then(response => this.actionsHistory = response.data.actions)
+              .catch(e => alert('Não foi possível realizar a operação: ' + e.message));
+         }
+      }));
+
+      Alpine.data('mapping', () => ({
+         initialPosition: {
+            x: null,
+            y: null
+         },
+         initialOrientation: <%= orientations.FACING_NORTH %>,
+         flowerbedsToIrrigate: [
+            {
+               x: null,
+               y: null
+            }
+         ],
+
+         addFlowerbed(afterPosition = -1) {
+            let newFlowerbed = {
+               x: null,
+               y: null
+            };
+
+            if (afterPosition >= 0) {
+               this.flowerbedsToIrrigate.splice(afterPosition + 1, 0, newFlowerbed)
+            } else {
+               this.flowerbedsToIrrigate.unshift(newFlowerbed);
+            }
+         },
+         removeFlowerbed(index = -1) {
+            if (index >= 0) {
+               this.flowerbedsToIrrigate.splice(index, 1);
+            } else {
+               this.flowerbedsToIrrigate.splice(0);
+            }
+         },
+         confirmConfigs() {
+            try {
+               document.querySelectorAll('input').forEach(item => {
+                  if (!item.checkValidity()) {
+                     item.reportValidity();
+                     throw 'Validation error';
+                  };
+               });
+
+               this.$dispatch('turn-on-robot', {
+                  initialPosition: this.initialPosition,
+                  initialOrientation: this.initialOrientation,
+                  flowerbedsToIrrigate: this.flowerbedsToIrrigate
+               });
+            } catch (e) {}
+         }
+      }));
+   });
+</script>

@@ -25,7 +25,7 @@ test('Output utilizando moveTo (MMEM)', () => {
       y: 3
    });
 
-   expect(robot.actionsHistory).toBe('MMDMMM');
+   expect(robot.actionsHistory).toBe('MMEM');
 });
 
 test('Output utilizando moveTo (EEM)', () => {

@@ -81,6 +81,9 @@ export default class Robot {
         this._actionsHistory.push(actions.MOVE);
     }
 
+    // TODO: moveTo deve ficar em um facade
+    // O primeiro parâmetro deve ser uma classe que implementa a interface movable
+    // O segundo é um objeto com props x e y
     moveTo(position) {
         let targetOrientations = this.possibleOrientations(position);
 

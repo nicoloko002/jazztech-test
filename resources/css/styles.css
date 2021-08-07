@@ -1,0 +1,56 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import 'spinner.css';
+
+div.form-group {
+   @apply relative mb-2 mx-2;
+}
+
+div.form-group > input,
+div.form-group > select {
+   @apply rounded transition-colors bg-gray-100 duration-300 mt-1 block w-full px-1 pt-4 pb-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400 outline-none;
+}
+
+div.form-group > input + label,
+div.form-group > select + label {
+   @apply absolute left-1 top-3.5 text-lg text-gray-500 font-bold transition duration-300;
+   transform-origin: top left;
+}
+
+div.form-group > input:focus + label,
+div.form-group > input:not(:placeholder-shown) + label,
+div.form-group > select:focus + label,
+div.form-group > .filled:not(:placeholder-shown) + label {
+   transform: translateY(-1rem) scale(.7);
+   @apply text-blue-500;
+}
+
+.invalid {
+   @apply border-2 border-red-600 ring-4 ring-red-500 ring-opacity-50 !important;
+}
+
+h1 {
+
+}
+
+.info-group {
+   @apply w-full overflow-hidden border-t shadow-md mb-5;
+}
+
+.info-group h2 {
+   @apply p-5 bg-blue-400 border-4 border-gray-300 text-white text-xl font-bold;
+}
+
+.info-group > div {
+   @apply mx-2;
+}
+
+.info-group > div:first-of-type {
+   @apply mt-2;
+}
+
+.info-group > div:last-of-type {
+   @apply mb-2;
+}
