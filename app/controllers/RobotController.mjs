@@ -1,4 +1,4 @@
-import Robot from '../models/Robot.mjs'
+import Robot from '../facades/Robot.mjs'
 
 const index = function (req, res) {
    res.render('pages/index', {
@@ -9,17 +9,8 @@ const index = function (req, res) {
 const turnOn = function (req, res) {
    // validateInput();
    // TODO: Criar validação de dados
-
-   let robot = new Robot(req.body.initialPosition, req.body.initialOrientation);
-
-   req.body.flowerbedsToIrrigate.forEach(item => {
-      robot.moveTo(item);
-      robot.irrigate();
-   });
-
-   // Facade para movimentação do robo
    res.json({
-      actions: robot.actionsHistory
+      actions: Robot.irrigateFlowerbeds(req.body.initialPosition, req.body.initialOrientation, req.body.flowerbedsToIrrigate)
    });
 }
 

@@ -1,4 +1,4 @@
-import Robot from '../app/models/Robot'
+import Robot from '../../app/models/Robot'
 
 test('Virando 90° para a esquerda olhando para o Norte', () => {
    let robot = new Robot({

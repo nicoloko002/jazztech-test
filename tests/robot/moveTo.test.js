@@ -1,4 +1,5 @@
-import Robot from '../app/models/Robot'
+import Robot from '../../app/models/Robot.mjs';
+import Movement from '../../app/facades/Movement.mjs';
 
 test('Output utilizando moveTo (MMDMMM)', () => {
    let robot = new Robot({
@@ -6,7 +7,7 @@ test('Output utilizando moveTo (MMDMMM)', () => {
       y: 1
    }, Robot.orientations.FACING_NORTH);
 
-   robot.moveTo({
+   Movement.moveTo(robot, {
       x: 4,
       y: 3
    });
@@ -20,7 +21,7 @@ test('Output utilizando moveTo (MMEM)', () => {
       y: 1
    }, Robot.orientations.FACING_NORTH);
 
-   robot.moveTo({
+   Movement.moveTo(robot, {
       x: 0,
       y: 3
    });
@@ -34,7 +35,7 @@ test('Output utilizando moveTo (EEM)', () => {
       y: 1
    }, Robot.orientations.FACING_NORTH);
 
-   robot.moveTo({
+   Movement.moveTo(robot, {
       x: 1,
       y: 0
    });

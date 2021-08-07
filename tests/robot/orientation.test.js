@@ -1,4 +1,5 @@
-import Robot from '../app/models/Robot'
+import Robot from '../../app/models/Robot';
+import Movement from '../../app/facades/Movement';
 
 test('Orientação para todos os lados está correta', () => {
    let robot = new Robot({
@@ -6,17 +7,17 @@ test('Orientação para todos os lados está correta', () => {
       y: 1
    }, Robot.orientations.FACING_NORTH);
 
-   expect(robot.getAxisFromOrientation(robot.orientation)).toBe('y');
+   expect(Movement.getAxisFromOrientation(robot.orientation)).toBe('y');
 
    robot.turnRight();
 
-   expect(robot.getAxisFromOrientation(robot.orientation)).toBe('x');
+   expect(Movement.getAxisFromOrientation(robot.orientation)).toBe('x');
 
    robot.turnRight();
 
-   expect(robot.getAxisFromOrientation(robot.orientation)).toBe('y');
+   expect(Movement.getAxisFromOrientation(robot.orientation)).toBe('y');
 
    robot.turnRight();
 
-   expect(robot.getAxisFromOrientation(robot.orientation)).toBe('x');
+   expect(Movement.getAxisFromOrientation(robot.orientation)).toBe('x');
 });
