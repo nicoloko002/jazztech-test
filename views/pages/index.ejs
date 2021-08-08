@@ -109,7 +109,7 @@
                initialOrientation: e.detail.initialOrientation,
                flowerbedsToIrrigate: e.detail.flowerbedsToIrrigate
             }).then(response => this.actionsHistory = response.data.actions)
-              .catch(e => alert('Não foi possível realizar a operação: ' + e.message));
+              .catch(e => alert('Não foi possível realizar a operação: ' + (e.response && e.response.data && e.response.data.errors && e.response.data.errors.map(item => '\n- ' + item.msg).join('') || e.message)));
          }
       }));
 

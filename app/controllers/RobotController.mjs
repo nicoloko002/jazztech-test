@@ -9,8 +9,6 @@ const index = function (req, res) {
 }
 
 const turnOn = function (req, res) {
-   // validateInput();
-   // TODO: Criar validação de dados
    res.json({
       actions: Robot.irrigateFlowerbeds(req.body.initialPosition, req.body.initialOrientation, req.body.flowerbedsToIrrigate)
    });
